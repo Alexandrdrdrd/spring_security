@@ -1,88 +1,90 @@
-//package com.sasha.oauthtest.springboot_oauth_test.model;
-//
-//
-//import org.hibernate.annotations.Cascade;
-//import org.springframework.security.core.parameters.P;
-//
-//import javax.persistence.*;
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//@Entity
-//@Table(name = "users")
-//public class User {
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "id")
-//    private int id;
-//
-//    @Column(name = "username")
-//    private String username;
-//
-//    @Column(name = "password")
-//    private String password;
-//
-////    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-////    @JoinTable(name = "roles_users",
-////            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-////            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
-////    private List<Role> roles;
-//
-//    public User(String username, String password) {
-//        this.username =  username;
-//        this.password = password;
-//    }
-////
-////    public void addRoleToUser(Role role){
-////        if(roles == null){
-////            roles = new ArrayList<Role>();
-////        }
-////        this.roles.add(role);
-////    }
-//    public User() {
-//    }
-//
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
-//
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//
-////    public List<Role> getRoles() {
-////        return roles;
-////    }
-////
-////    public void setRoles(List<Role> roles) {
-////        this.roles = roles;
-////    }
-//
-//    @Override
-//    public String toString() {
-//        return "User{" +
-//                "id=" + id +
-//                ", username='" + username + '\'' +
-//                ", password='" + password + '\'' +
-////                ", roles=" + roles +
-//                '}';
-//    }
-//}
-//
+package com.sasha.oauthtest.springboot_oauth_test.model;
+
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "spring_securiry_template")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    int id;
+
+    @Column(name = "name")
+    String name;
+
+    @Column(name = "password")
+    String password;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
+
+    public User(String name, String password, Role role, Status status) {
+        this.name = name;
+        this.password = password;
+        this.role = role;
+        this.status = status;
+    }
+
+    public User() {
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
+}

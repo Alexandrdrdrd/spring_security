@@ -2,9 +2,9 @@ package com.sasha.oauthtest.springboot_oauth_test.controllers;
 
 
 import com.sasha.oauthtest.springboot_oauth_test.model.TestEntity;
-import com.sasha.oauthtest.springboot_oauth_test.model.User;
+
 import com.sasha.oauthtest.springboot_oauth_test.repository.TestEntityRepository;
-import com.sasha.oauthtest.springboot_oauth_test.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,20 +13,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class Controller {
 
-    @Autowired
-    UserRepository userRepository;
 
     @Autowired
     TestEntityRepository testEntityRepository;
 
     @GetMapping("/protected/{id}")
-    @PreAuthorize("hasAuthority('developers:read')")
-    public User helloWorldFromProtectedRecourse(@PathVariable int id) {
-//        Role role = new Role("ROLE_ADMIN");
-//        User user = new User("Sasha", "sasha");
-//        user.addRoleToUser(role);
-//        userRepository.save(user);
-        return userRepository.findById(id).get();
+    @PreAuthorize("hasAuthority('developers:write')")
+    public TestEntity helloWorldFromProtectedRecourse(@PathVariable int id) {
+        return testEntityRepository.findTestEntityById(id);
     }
 
     @PostMapping("/create_test_entity")
